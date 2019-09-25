@@ -14,17 +14,23 @@ class GraficosJV {
             id = "#" + id;
             var casa = d3.select(id);
             casa.on("click", function() {
-                var pos = $(this).attr("id");
+                var casaClicada = $(this);
+                var pos = casaClicada.attr("id");
                 var status = self.jv.fazerJogada(pos);
-                if(status) {
+                if(status != "") {
                     $(this).text(self.jv.simboloDaVez);
                     self.jv.trocarSimboloDaVez();
                     self.jv.imprimirJogo();
+                }
+                if(status == "FIM") {
+                    var mensagem = "O jogador "+self.jv.vencedor+" venceu!"
+                    alert(mensagem);
                 }
             });
             self.casas.push(casa);
         });
     }
 }
+
 
 //
