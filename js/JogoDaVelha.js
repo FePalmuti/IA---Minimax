@@ -59,6 +59,7 @@ class JogoDaVelha {
                 return "FIM";
             }
             else {
+                this.trocarSimboloDaVez();
                 return "OK";
             }
         }
@@ -133,7 +134,7 @@ class JogoDaVelha {
 jv = new JogoDaVelha();
 jv.imprimirJogo();
 
-i = new GraficosJV(jv);
+i = new Graficos(jv);
 
 n1 = new Noh("1");
 
@@ -146,5 +147,6 @@ n2.adicionarFilhos([n4]);
 
 a = new Arvore(n1);
 a.imprimir();
+
 
 //

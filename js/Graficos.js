@@ -1,4 +1,4 @@
-class GraficosJV {
+class Graficos {
     jv = null;
     casas = [];
 
@@ -18,19 +18,29 @@ class GraficosJV {
                 var pos = casaClicada.attr("id");
                 var status = self.jv.fazerJogada(pos);
                 if(status != "") {
-                    $(this).text(self.jv.simboloDaVez);
-                    self.jv.trocarSimboloDaVez();
                     self.jv.imprimirJogo();
                 }
                 if(status == "FIM") {
                     var mensagem = "O jogador "+self.jv.vencedor+" venceu!"
                     alert(mensagem);
+                    self.atualizar();
                 }
             });
             self.casas.push(casa);
         });
     }
+
+    atualizar() {
+        // Indice para acessar a lista de casas do objeto graficos
+        var indice = 0;
+        var simbolo;
+        for(let linha=0; linha<3; linha++) {
+            for(let coluna=0; coluna<3; coluna++) {
+                simbolo = this.jv.grade[linha][coluna];
+                this.casas[indice].text(simbolo);
+                indice++;
+            }
+        }
+    }
 }
-
-
 //
