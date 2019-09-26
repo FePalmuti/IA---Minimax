@@ -21,7 +21,12 @@ class Graficos {
                     self.jv.imprimirJogo();
                 }
                 if(status == "FIM") {
-                    var mensagem = "O jogador "+self.jv.vencedor+" venceu!"
+                    if(self.jv.vencedor != "NINGUEM") {
+                        var mensagem = "O jogador "+self.jv.vencedor+" venceu!";
+                    }
+                    else {
+                        var mensagem = "O jogo empatou!";
+                    }
                     alert(mensagem);
                     self.atualizar();
                 }
@@ -43,4 +48,3 @@ class Graficos {
         }
     }
 }
-//

@@ -37,3 +37,10 @@ class Arvore {
         this.imprimirRecursivo(this.raiz);
     }
 }
+
+class NohJogo extends Noh {
+    constructor(id, jogoDaVelha) {
+        super(id);
+        this.jv = jogoDaVelha;
+    }
+}

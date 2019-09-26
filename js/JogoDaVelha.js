@@ -25,7 +25,7 @@ class JogoDaVelha {
     jogadaDisponivel(jogada) {
         if(this.jogadasDisponiveis.includes(jogada)) {
             var indice = this.jogadasDisponiveis.indexOf(jogada);
-            delete this.jogadasDisponiveis[indice];
+            this.jogadasDisponiveis.splice(indice, 1);
             return true;
         }
         else {
@@ -34,7 +34,7 @@ class JogoDaVelha {
     }
 
     // Recebe uma entrada do tipo "c01", extraindo o "0" e o "1"
-    processar_jogada(jogada) {
+    processarJogada(jogada) {
         var linha, coluna;
         linha = jogada.substring(1, 2);
         coluna = jogada.substring(2, 3);
@@ -50,7 +50,7 @@ class JogoDaVelha {
             return "";
         }
         if(this.jogadaDisponivel(jogada)) {
-            var coordenadas = this.processar_jogada(jogada);
+            var coordenadas = this.processarJogada(jogada);
             var linha = coordenadas["linha"];
             var coluna = coordenadas["coluna"];
             this.grade[linha][coluna] = this.simboloDaVez;
@@ -129,24 +129,19 @@ class JogoDaVelha {
         }
         alert(retorno);
     }
+
+    // Retorna uma copia do proprio objeto
+    clonar() {
+        var novoJV = new JogoDaVelha();
+        novoJV.grade = []
+        // Clona a grade do jogo original, nao fazendo referencia
+        for(let linha=0; linha<3; linha++) {
+            novoJV.grade.push(this.grade[linha].slice());
+        }
+        novoJV.simboloDaVez = this.simboloDaVez;
+        novoJV.jogadasDisponiveis = this.jogadasDisponiveis.slice();
+        novoJV.fimDeJogo = this.fimDeJogo;
+        novoJV.vencedor = this.vencedor;
+        return novoJV;
+    }
 }
-
-jv = new JogoDaVelha();
-jv.imprimirJogo();
-
-i = new Graficos(jv);
-
-n1 = new Noh("1");
-
-n2 = new Noh("2");
-n3 = new Noh("3");
-n1.adicionarFilhos([n2, n3]);
-
-n4 = new Noh("4");
-n2.adicionarFilhos([n4]);
-
-a = new Arvore(n1);
-a.imprimir();
-
-
-//
