@@ -37,8 +37,8 @@ class NohMinimax extends Noh {
     }
 }
 
+// Classe abstrata
 class Arvore {
-    raiz = null
     qntNohs = 0;
 
     constructor() {}
@@ -98,8 +98,24 @@ class ArvoreMinimax extends Arvore {
         this.simboloIA = simboloIA;
         this.raiz = new NohMinimax(raizJogo.id, true, null);
         this.autoGeracaoRecursiva(raizJogo, this.raiz);
+        this.raiz.valor = this.maiorValorDosFilhos(this.raiz.filhos);
     }
 
+    calcularValorNohMinimax(vencedor) {
+        // Se a IA vence nesse noh
+        if(vencedor == this.simboloIA) {
+            return 1;
+        }
+        else if(vencedor == "NINGUEM") {
+            return 0;
+        }
+        else {
+            return -1;
+        }
+    }
+
+    // Constroi a arvore minimax identica (em formato) a arvore de jogos, porem
+    // preenchendo somente os valores dos nohs folha
     autoGeracaoRecursiva(nohJogo, nohMinimax) {
         var filhos = [];
         var nohJogoFilho, id, vencedor, valor, novoNohMinimax;
@@ -122,17 +138,50 @@ class ArvoreMinimax extends Arvore {
         nohMinimax.adicionarFilhos(filhos);
     }
 
-    calcularValorNohMinimax(vencedor) {
-        // Se a IA vence nesse noh
-        if(vencedor == this.simboloIA) {
-            return 1;
+    maior(itens) {
+        var maior = -1;
+        for(let i=0; i<itens.length; i++) {
+            if(itens[i] > maior) {
+                maior = itens[i];
+            }
         }
-        else if(vencedor == "NINGUEM") {
-            return 0;
+        return maior;
+    }
+
+    // maiorValorDosFilhos e menorValorDosFilhos funcionam como metodos de
+    // propagacao dos valores (conceito de minimax), no sentido folhas -> raiz
+    maiorValorDosFilhos(filhos) {
+        var valoresFilhos = [];
+        for(let indice=0; indice<filhos.length; indice++) {
+            var filho = filhos[indice];
+            if(filho.valor == null) {
+                filho.valor = this.menorValorDosFilhos(filho.filhos);
+            }
+            valoresFilhos.push(filho.valor);
         }
-        else {
-            return -1;
+        return this.maior(valoresFilhos);
+    }
+
+    menor(itens) {
+        var menor = 1;
+        for(let i=0; i<itens.length; i++) {
+            if(itens[i] < menor) {
+                menor = itens[i];
+            }
         }
+        return menor;
+    }
+
+    menorValorDosFilhos(filhos) {
+        var valoresFilhos = [];
+        for(let indice=0; indice<filhos.length; indice++) {
+            var filho = filhos[indice];
+            if(filho.valor == null) {
+                filho.valor = this.maiorValorDosFilhos(filho.filhos);
+            }
+            valoresFilhos.push(filho.valor);
+        }
+        return this.menor(valoresFilhos);
     }
 
     imprimirRecursivo(noh) {
@@ -143,4 +192,5 @@ class ArvoreMinimax extends Arvore {
         }
     }
 }
+
 //
