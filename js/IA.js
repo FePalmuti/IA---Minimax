@@ -54,6 +54,19 @@ class IA {
         }
     }
 
+    mostrarNohsMinimaxEmProfundidade() {
+        var raiz = this.arvoreMinimax.raiz;
+        this.mostrarNohsMinimaxEmProfundidadeRecursivo(raiz);
+    }
+
+    mostrarNohsMinimaxEmProfundidadeRecursivo(noh) {
+        var representacao = noh.id+" "+noh.nivelTipoMax+" "+noh.valor;
+        alert(representacao);
+        for(let indice=0; indice<noh.filhos.length; indice++) {
+            this.mostrarNohsMinimaxEmProfundidadeRecursivo(noh.filhos[indice]);
+        }
+    }
+
     calcularValorNohMinimax(vencedor) {
         // Se a IA vence nesse noh
         if(vencedor == this.simbolo) {
@@ -76,12 +89,13 @@ class IA {
 
     gerarArvoreMinimaxRecursivo(nohJogo, nohMinimax) {
         var filhos = [];
-        var novoNohMinimax, id, vencedor, valor, nohJogoFilho;
+        var nohJogoFilho, id, vencedor, valor, novoNohMinimax;
         var nivelTipoMax = ! nohMinimax.nivelTipoMax;
         for(let indice=0; indice<nohJogo.filhos.length; indice++) {
-            id = nohJogo.filhos[indice].id;
-            if(nohJogo.jv.fimDeJogo) {
-                vencedor = nohJogo.jv.vencedor;
+            nohJogoFilho = nohJogo.filhos[indice];
+            id = nohJogoFilho.id;
+            if(nohJogoFilho.jv.fimDeJogo) {
+                vencedor = nohJogoFilho.jv.vencedor;
                 valor = this.calcularValorNohMinimax(vencedor);
                 novoNohMinimax = new NohMinimax(id, nivelTipoMax, valor);
                 filhos.push(novoNohMinimax);
@@ -89,9 +103,9 @@ class IA {
             else {
                 novoNohMinimax = new NohMinimax(id, nivelTipoMax, null);
                 filhos.push(novoNohMinimax);
-                nohJogoFilho = nohJogo.filhos[indice];
                 this.gerarArvoreMinimaxRecursivo(nohJogoFilho, novoNohMinimax);
             }
         }
+        nohMinimax.adicionarFilhos(filhos);
     }
 }

@@ -8,7 +8,8 @@ jv.fazerJogada("c12");
 
 g = new Graficos(jv);
 
-ia = new IA(jv);
+ia = new IA(jv, "x");
 ia.gerarArvoreJogos();
 //ia.mostrarJogosEmProfundidade();
 ia.gerarArvoreMinimax();
+//ia.mostrarNohsMinimaxEmProfundidade();
