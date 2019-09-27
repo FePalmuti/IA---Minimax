@@ -1,9 +1,11 @@
 class Graficos {
     jv = null;
+    ia = null;
     casas = [];
 
-    constructor(jv) {
+    constructor(jv, ia) {
         this.jv = jv;
+        this.ia = ia;
         // Atribuicao necessaria, pois o programa perde a referencia da palavra
         // "this", onde ocorre a definicao do "on click"
         var self = this;
@@ -17,8 +19,8 @@ class Graficos {
                 var casaClicada = $(this);
                 var pos = casaClicada.attr("id");
                 var status = self.jv.fazerJogada(pos);
-                if(status != "") {
-                    self.jv.imprimirJogo();
+                if(status == "OK") {
+                    status = ia.fazerJogada();
                 }
                 if(status == "FIM") {
                     if(self.jv.vencedor != "NINGUEM") {
@@ -28,8 +30,8 @@ class Graficos {
                         var mensagem = "O jogo empatou!";
                     }
                     alert(mensagem);
-                    self.atualizar();
                 }
+                self.atualizar();
             });
             self.casas.push(casa);
         });
@@ -48,3 +50,7 @@ class Graficos {
         }
     }
 }
+
+
+
+//
