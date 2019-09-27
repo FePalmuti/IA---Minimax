@@ -31,3 +31,9 @@ td {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
 }
+
+.meuBotao {
+    margin-top: 70px;
+    width: 140px;
+    height: 35px;
+}

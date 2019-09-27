@@ -10,7 +10,7 @@ class Graficos {
         // "this", onde ocorre a definicao do "on click"
         var self = this;
         // Lista do arquivo de constantes
-        idsCasas.forEach(function(id) {
+        IDS_CASAS.forEach(function(id) {
             // Padrao para uso do select
             // Ex: c11 -> #c11
             id = "#" + id;
@@ -32,6 +32,7 @@ class Graficos {
                     alert(mensagem);
                 }
                 self.atualizar();
+                self.bloquearBotaoDaVez();
             });
             self.casas.push(casa);
         });
@@ -49,8 +50,9 @@ class Graficos {
             }
         }
     }
+
+    bloquearBotaoDaVez() {
+        var botao = d3.select("#passarVez");
+        botao.attr("disabled", true);
+    }
 }
-
-
-
-//

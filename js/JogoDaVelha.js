@@ -1,23 +1,23 @@
 class JogoDaVelha {
     grade = [];
-    simboloDaVez = "x";
+    simboloDaVez = SIMBOLO_INICIAL;
     // Copia a lista do arquivo de constantes
-    jogadasDisponiveis = idsCasas.slice();
+    jogadasDisponiveis = IDS_CASAS.slice();
     fimDeJogo = false;
     vencedor = "";
 
     constructor() {
         for(let linha=0; linha<3; linha++) {
-            this.grade.push(["-", "-", "-"]);
+            this.grade.push([VAZIO, VAZIO, VAZIO]);
         }
     }
 
     trocarSimboloDaVez() {
-        if(this.simboloDaVez == "x") {
-            this.simboloDaVez = "o";
+        if(this.simboloDaVez == SIMBOLO_INICIAL) {
+            this.simboloDaVez = OUTRO_SIMBOLO;
         }
         else {
-            this.simboloDaVez = "x";
+            this.simboloDaVez = SIMBOLO_INICIAL;
         }
     }
 
@@ -74,7 +74,7 @@ class JogoDaVelha {
         for(let linha=0; linha<3; linha++) {
             if(this.grade[linha][0] == this.grade[linha][1]) {
                 if(this.grade[linha][1] == this.grade[linha][2]) {
-                    if(this.grade[linha][2] != "-") {
+                    if(this.grade[linha][2] != VAZIO) {
                         this.vencedor = this.grade[linha][2];
                         return true;
                     }
@@ -85,7 +85,7 @@ class JogoDaVelha {
         for(let coluna=0; coluna<3; coluna++) {
             if(this.grade[0][coluna] == this.grade[1][coluna]) {
                 if(this.grade[1][coluna] == this.grade[2][coluna]) {
-                    if(this.grade[2][coluna] != "-") {
+                    if(this.grade[2][coluna] != VAZIO) {
                         this.vencedor = this.grade[2][coluna];
                         return true;
                     }
@@ -95,7 +95,7 @@ class JogoDaVelha {
         // Busca vencedor na diagonal 1
         if(this.grade[0][0] == this.grade[1][1]) {
             if(this.grade[1][1] == this.grade[2][2]) {
-                if(this.grade[2][2] != "-") {
+                if(this.grade[2][2] != VAZIO) {
                     this.vencedor = this.grade[2][2];
                     return true;
                 }
@@ -104,7 +104,7 @@ class JogoDaVelha {
         // Busca vencedor na diagonal 2
         if(this.grade[0][2] == this.grade[1][1]) {
             if(this.grade[1][1] == this.grade[2][0]) {
-                if(this.grade[2][0] != "-") {
+                if(this.grade[2][0] != VAZIO) {
                     this.vencedor = this.grade[2][0];
                     return true;
                 }
