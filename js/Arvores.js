@@ -185,12 +185,12 @@ class ArvoreMinimax extends Arvore {
     }
 
     imprimirRecursivo(noh) {
-        var representacao = noh.id+" "+noh.nivelTipoMax+" "+noh.valor;
+        var representacao = "ID : "+noh.id+"\n"
+                +"Noh eh max : "+noh.nivelTipoMax+"\n"
+                +"Valor : "+noh.valor;
         alert(representacao);
         for(let indice=0; indice<noh.filhos.length; indice++) {
             this.imprimirRecursivo(noh.filhos[indice]);
         }
     }
 }
-
-//
