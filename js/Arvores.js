@@ -44,3 +44,16 @@ class NohJogo extends Noh {
         this.jv = jogoDaVelha;
     }
 }
+
+class NohMinimax extends Noh {
+    // "nivelTipoMax" eh um booleano que, se for igual a true, indica que
+    // o nivel da arvore em que o noh se encontra eh do tipo max (conceito de
+    // minimax). Se for igual a false, o eh do tipo min.
+    constructor(id, nivelTipoMax, valor) {
+        super(id);
+        this.nivelTipoMax = nivelTipoMax;
+        this.valor = valor;
+    }
+}
+
+//

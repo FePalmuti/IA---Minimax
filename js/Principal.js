@@ -1,7 +1,14 @@
 jv = new JogoDaVelha();
-jv.imprimirJogo();
+jv.fazerJogada("c00");
+jv.fazerJogada("c01");
+jv.fazerJogada("c02");
+jv.fazerJogada("c10");
+jv.fazerJogada("c11");
+jv.fazerJogada("c12");
 
 g = new Graficos(jv);
 
 ia = new IA(jv);
-ia.gerarArvoreDeJogos();
+ia.gerarArvoreJogos();
+//ia.mostrarJogosEmProfundidade();
+ia.gerarArvoreMinimax();
